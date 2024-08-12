@@ -1,22 +1,19 @@
 import asyncio
 
-from crawlee.playwright_crawler.playwright_crawler import PlaywrightCrawler
+from crawlee.playwright_crawler import PlaywrightCrawler
 
 from .routes import router
 
 
 async def main() -> None:
-    """The crawler entry point."""
     crawler = PlaywrightCrawler(
-        request_handler=router,
+        # Let's limit our crawls to make our tests shorter and safer.
         max_requests_per_crawl=50,
+        # Provide our router instance to the crawler.
+        request_handler=router,
     )
 
-    await crawler.run(
-        [
-            'https://crawlee.dev',
-        ]
-    )
+    await crawler.run(['https://warehouse-theme-metal.myshopify.com/collections'])
 
 
 if __name__ == '__main__':

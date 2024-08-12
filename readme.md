@@ -39,3 +39,23 @@ And run it using "poetry run python -m [project-name]".
 ```
 playwright install
 ```
+In case of emergency use: ``` python3 -m pip install --force-reinstall playwright ```
+
+## Real example using the Playwright crawler
+
+
+### The crawling strategy
+
+* Visit the store page containing the list of categories (our start URL).
+* Enqueue all links to all categories.
+* Enqueue all product pages from the current page.
+* Enqueue links to next pages of results.
+* Open the next page in queue.
+* When it's a results list page, go to 2.
+* When it's a product page, scrape the data.
+* Repeat until all results pages and all products have been processed.
+* PlaywrightCrawler will make sure to visit the pages for you, if you provide the correct requests, and you already know how to enqueue pages, so this should be fairly easy. Nevertheless, there are few more tricks that we'd like to showcase.
+
+Website for demo: ``` https://warehouse-theme-metal.myshopify.com/collections ```
+
+
